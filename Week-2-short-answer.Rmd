@@ -1,6 +1,6 @@
 # Week 2 Short Answer Questions
 
-## Your name should appear here!
+## Corey McGinnis
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,116 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+1.1
+a) Taffy: value
+b) year: quantitative
+c) sex: categorical
+d) name: categorical
+e) count: quantitative
+
+1.2
+-first value of president written "Lincoln, Abraham", not conforming with the "First Last" format
+-third value of in office written 1837 to 1841, not conforming to startyear-endyear format
+-first value in number of states written "it depends" rather than being a number
+
+1.4
+A: year (year), Algeria (value), Brazil (value), Columbia (value)
+B: Country (country), y2000 (value), y2001 (value)
+C: Country (country), year (year), value (value)
+
+1.5
+5 variables
+The cases represent different bits of data about each variable
+I did not understand the difference between numerical and quantitative
+
+
+2.2
+file name
+the name of an argument in a named argument
+
+2.3
+Current Population Survey
+
+2.4
+The NHANES, at the beginning is unneccesary
+
+2.6
+first-essay contains subtraction sign
+"MyData" is a string
+small sample contains a space
+.MyData. starts with a dot
+sqrt() is already a function
+
+2.7
+
+
+2.8
+a. improper syntax (no parentheses)
+b. improper syntax (two dashes)
+c. invalid object name
+d. missing end quotation
+e. no mistake
+
+2.9
+. and _ can be used in R object
+all can be used in a character string
+
+2.10
+CountryData has 76 variables
+tfat measures mass of trunk fat
+23018 cases in WorldCities
+count is the third variable in BabyNames
+Party affiliation: DEM=Democratic, LIB=Libertarian,REP=Republican,UNA=Unaffiliated
+
+```{r}
+data("CountryData")
+View(CountryData)
+```
+
+
+3.1
+1. data frame
+2. fireplace = function(x) {return(x)}
+3. name = "fireplace"
+4. fireplace = 10
+
+3.2
+should be filter(name=="Prince")
+
+3.3
+should be help(NHANES)
+
+3.4
+BabyNames = data table name
+filter = function
+name = variable name
+== = function name
+group_by = function
+year = name of a named argument
+sex - name of a named argument
+summarise = function
+yearlyTotal = variable
+sum = function
+count = name of a named argument
+ggplot = function
+aes = function
+x = variable
+y = variable
+geom_pont = function
+color = variable
+geom_vline = function
+xintercept = variable
+
+3.5
+
+brain weight
+56 cases
+it exists/ we have data
+herbi, omni, carni, insecti: what they eat
+
+3.6
+```{r}
+BabyNames %>%
+  group_by(year, sex) %>%
+  summarise(totalBirths=sum(count))
+```

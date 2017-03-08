@@ -1,6 +1,6 @@
 # Week 4 Short Answer Questions
 
-## Your name should appear here!
+## Corey McGinnis
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,55 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+#8.1, 
+1) c)
+2) a), b), g)
+3) e)
+4) f)
+5) d)
+
+#8.2, 
+(1) ggplot(CPS85, aes(age, wage)) + geom_point(aes(shape = married)) + facet_wrap(~sector)
+(2) ggplot(CPS85, aes(age, wage)) + geom_point(aes()) + facet_wrap(~married~sex)
+
+#8.3
+(A) ggplot(CPS85, aes(age, wage)) + geom_point(aes())
+(B) ggplot(CPS85, aes(age, wage)) + geom_point(aes(shape = sex))
+(C) ggplot(CPS85, aes(age, wage)) + geom_point(aes(shape = sex)) + facet_wrap(~married)
+(D) ggplot(CPS85, aes(age, wage)) + geom_point(aes(shape = married))
+
+#9.1, 
+a) transformation
+b)data verb
+c)
+d)summary
+e)
+f)summary function
+g)summary function
+h)data verb
+i)quick presentation
+
+#9.3
+1.
+```{r}
+library(ggplot2)
+```
+
+```{r}
+diamonds %>%
+  group_by(color) %>%
+  summarise(weight = mean(carat)) %>%
+  arrange(desc(weight)) %>%
+  head(1)
+```
+J
+
+2.
+```{r}
+diamonds %>%
+  group_by(clarity) %>%
+  summarise(size = mean(table/carat)) %>%
+  arrange(desc(size)) %>%
+  head(1)
+```
+VVS1

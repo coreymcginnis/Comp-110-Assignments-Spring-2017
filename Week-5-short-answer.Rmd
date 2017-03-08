@@ -1,6 +1,6 @@
 # Week 5 Short Answer Questions
 
-## Your name should appear here!
+## Corey McGinnis
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,25 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+##10.1
+the join family of data verbs always has a data table as one of the arguments inside the parentheses because is is joining cases and variables from, or a whole data table with another.
+
+##10.2
+The two tables cannot be combined in this manner because the two tables do not have identical cases in an identical order. Demographics contains Akrotiri as the second case in the country variable. ContryCentroids contains Aland in that position.
+
+##10.3
+1. It would be easiest to find the change from 2000 to 2001 for each country with Data Table B. To do this, I would create a new variable, change, in which each case is that case of Y2001 - Y2000
+2. Again, Table B. Join Table B with the ContinentData table by country, and group_by continent. For each continent, take the sum of the poulations in a given year.
+
+
+##11.1
+a. Version one: number of babies of a name of a gender in one year
+   tow: numbers of males and female babies for a name in a year
+   three: Number of babies for a gender in year 1912 and 2012
+b. One is wide, Two is narrow
+c. 
+
+
+##11.3
+##11.4
+##11.5

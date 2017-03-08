@@ -1,6 +1,6 @@
 # Week 6 Short Answer Questions
 
-## Your name should appear here!
+## Corey McGinnis
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,47 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+##12.1
+```{r}
+BabyNames %>%
+  group_by(sex, name) %>%
+  summarise(total = sum(count)) %>%
+  filter(rank(desc(total)) <= 5)
+```
+
+##12.2
+```{r}
+BabyNames %>%
+  group_by(year, sex) %>%
+  summarise(total = sum(count))
+```
+
+##12.3
+
+##13.1
+1. 8 distinct vertices
+2. 9 edges
+
+##13.2
+1. A, B, C, D
+2. Table 2
+3. Table 1 doesn't display the correct direction of all edges, Table 3 has 3 columns
+
+##13.3
+Table 2
+
+##13.4
+1. exports
+2. pop
+
+##14.1
+```{r}
+CPS85 %>%
+  ggplot(aes(x = sex, y = wage)) +
+  geom_boxplot(fill = F)
+```
+
+
+##14.3, 
+##14.7, 
+##14.10

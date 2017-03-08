@@ -1,13 +1,89 @@
 # Week 3 Short Answer Questions
 
-## Your name should appear here!
+## Corey McGinnis
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
 
 ```{r include = FALSE}
 library(DataComputing)
+library(mosaicData)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+##5.1
+```{r}
+ggplot(data=CPS85,aes(x=sex,y=wage ))+geom_bar(stat='identity',position='stack', width=.9)+ facet_wrap(~south,ncol=3) 
+```
+
+#5.2
+```{r}
+WorldMap(HappinessIndex,country,corruption)
+```
+
+#6.5
+b. State and Polling Organization
+
+#6.6
+d. Glyph: Rectangle. Graphical attribute: color and text
+
+#6.7
+d. NYT poll probability for the Democratic Candidate
+
+#6.8
+```{r}
+Small <-
+  NCHS %>%
+  sample_n(size = 5000)
+
+ggplot(data=Small,aes(x=bmi,y=weight))+geom_point()+aes(colour=smoker) 
+```
+
+x-coord maps to bmi
+y-coord maps to weight
+color blue maps to smoker
+color red maps to non-smoker
+color grey maps to NA
+
+#7.1, 
+a. mean
+b. mutate
+c. desc
+d. filter
+e. group_by
+f. summarise
+
+#7.4
+a) Uses a case not a variable in group_by
+b) Calls Tmp in summarize
+c) doesn't use %>%
+
+#7.5, 
+a) arrange(count)
+```{r}
+BabyNames %>%
+  arrange(count)
+```
+b) filter(sex == "F")
+c) filter(sex == "M")
+d) summarise(total = sum(count))
+e) group_by(name, count)
+#7.7, 
+a) do not need to use BabyNames in groupby or summarise
+b) never calls BabyNames
+c) uses -> instead of %>%
+d) statements and syntax are backwards
+
+#7.11, 
+a. number of patients of each sex and their average age
+b. number of patients with each diagnosis, and the mean age of each diagnosis
+c. number of patients with each diagnosis divided into the different sexes, mean age of each sex diagnosis
+d. number of types of diagnosises at each age, average age of each age
+e. number of people at each different age, and average age
+#7.12
+1. n()
+2. names
+3. ??
+4. library
+5. group_by
+6. sum

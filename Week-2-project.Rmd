@@ -1,6 +1,6 @@
 # Week 2 Project
 
-## Your name should appear here!
+## Corey McGinnis
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,66 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+I downloaded these data from the following site: "http://tiny.cc/dcf/Library-small.rda"
+
+#Basics
+
+```{r}
+load("~/Comp-110-Assignments-Spring-2017/Library-small.rda")
+```
+
+
+4.
+Number of cases in `Bks`
+```{r}
+nrow(Bks)
+```
+
+
+Names of variables in `Bks`
+```{r}
+names(Bks)
+```
+
+
+Number of cases in `Inv`
+```{r}
+nrow(Inv)
+```
+
+
+Names of variables in `Inv`
+```{r}
+names(Inv)
+```
+
+
+5. The number of books with each different `Current.Status`
+```{r}
+Inv %>%
+  group_by(Current.Status) %>%
+  tally()
+```
+1866 books are available, 
+1 book is missing,
+18 books are on loan,
+and 115 books are withdrawn
+
+6. Number of times books have been checked out
+```{r}
+Inv %>%
+  group_by(Issued.Count) %>%
+  tally()
+```
+There are
+996 books that have been checked out 0 times,
+337 books that have been checked out 1 time,
+203 books that have been checked out 2 times,
+121 books that have been checked out 3 times,
+69 books that have been checked out 4 times,
+46 books that have been checked out 5 times,
+38 books that have been checked out 6 times,
+29 books that have been checked out 7 times,
+24 books that have been checked out 8 times,
+20 books that have been checked out 9 times,
+and an unidentified number of books that have been checked out 10 or more times.

@@ -1,8 +1,6 @@
 # Week 1 Project  
 
-## Corey
-
-
+## Corey McGinnis
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -12,4 +10,11 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+[The Summer of Love](https://en.wikipedia.org/wiki/Summer_of_Love)
+
+-The so called 'Summer of Love' took place in the summer of 1967 in the Haight-Ashbury neighborhood of San Francisco
+-Thousands of young people migrated to the neighborhood
+-By the end of the summer problems of disease and youth homelessness ran rampant
+-On the upside, a lot of great music was made
+
+![A good picture](https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/KFRC_Fantasy_Fair_Dryden_Balin_Kantner.png/440px-KFRC_Fantasy_Fair_Dryden_Balin_Kantner.png)

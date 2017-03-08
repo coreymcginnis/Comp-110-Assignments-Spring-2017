@@ -1,13 +1,122 @@
 # Week 4 Project
 
-## Your name should appear here!
+## Corey McGinnis
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
 
 ```{r include = FALSE}
 library(DataComputing)
+library(mosaicData)
 ```
 <!-- put your content after this line -->
+```{r}
+Birthdays
+```
 
-Here is my content!
+1.
+```{r}
+DailyBirths <- Birthdays %>%
+  group_by(date) %>%
+  summarise(total = sum(births))
+
+the_frame = ggplot(data = DailyBirths, aes(x = date, y = total))
+layer1 = geom_point(data = DailyBirths)
+the_frame+layer1
+```
+
+2. seasonality
+a. each week
+```{r}
+Week <- Birthdays %>%
+  mutate(weekNum = lubridate::week(date)) %>%
+  group_by(weekNum) %>%
+  summarise(totalBirths = sum(births))
+
+the_frame = ggplot(data = Week, aes(x = weekNum, y = totalBirths))
+layer1 = geom_point(data = Week)
+the_frame+layer1
+```
+
+b. each month
+```{r}
+Month <- Birthdays %>%
+  group_by(month) %>%
+  summarise(totalBirths = sum(births))
+
+
+```
+
+c.
+```{r}
+JulianDay <- Birthdays %>%
+  mutate(jday = lubridate::yday(date)) %>%
+  group_by(jday) %>%
+  summarise(total = sum(births))
+JulianDay
+```
+
+3. day of the week
+```{r}
+DayOfWeek <- Birthdays %>%
+  group_by(wday) %>%
+  summarise(total = sum(births))
+DayOfWeek
+```
+
+4.Two years
+```{r}
+MyTwoYears <- Birthdays %>%
+  filter(year == 1980 | year == 1981) %>%
+  group_by(date, wday) %>%
+  summarise(total = sum(births))
+
+plot_frame = ggplot(data = MyTwoYears, aes(x = date, y = total))
+layer1 = geom_point(aes(col=wday))
+plot_frame+layer1
+```
+We observe that there are more people born on weekdays, and more people born in the summer and fewer people born in the winter
+
+5.
+```{r}
+Holidays <- read.csv("http://tiny.cc/dcf/US-Holidays.csv") %>%
+  mutate(date = as.POSIXct(lubridate::dmy(date)))
+Holidays
+```
+
+6.
+```{r}
+MyTwoYears <- Birthdays %>%
+  filter(year == 1980 | year == 1981) %>%
+  group_by(date, wday) %>%
+  summarise(total = sum(births))
+
+Holiday <- Holidays %>%
+  filter(year == 1980 | year == 1981) %>%
+  group_by(holiday)
+
+ggplot(data = MyTwoYears, aes(x = date, y = total)) + 
+  geom_line(aes(col = wday)) +
+  geom_vline(data = Holidays, aes(xintercept = as.numeric(date))) +
+  geom_text(data = Holiday, aes(y = 10000, label = holiday, angle = 60))
+```
+
+7.
+```{r}
+MyTwoYears <- Birthdays %>%
+  filter(year == 1980 | year == 1981) %>%
+  group_by(date, wday) %>%
+  summarise(total = sum(births)) %>%
+  mutate(is_holiday = date %in% Holiday$date)
+MyTwoYears
+
+Holiday <- Holidays %>%
+  filter(year == 1980 | year == 1981) %>%
+  group_by(holiday)
+
+ggplot(data = MyTwoYears, aes(x = date, y = total)) + 
+  geom_point(aes(col = wday, shape = is_holiday, size = is_holiday))
+  #geom_vline(data = Holidays, aes(xintercept = as.numeric(date))) +
+  #geom_text(data = Holiday, aes(y = 10000, label = holiday, angle = 60))
+```
+

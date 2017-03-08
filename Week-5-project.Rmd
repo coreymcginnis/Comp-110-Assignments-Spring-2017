@@ -1,6 +1,6 @@
 # Week 5 Project
 
-## Your name should appear here!
+## Corey McGinnis
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
@@ -10,4 +10,39 @@ library(DataComputing)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+```{r}
+download.file("http://tiny.cc/dcf/ScorecardSmall.Rda", 
+              destfile = "ScorecardSmall.Rda")
+load("ScorecardSmall.Rda")
+```
+
+
+```{r}
+Public_Private <- ScorecardSmall %>%
+  filter(CONTROL != 3) %>%
+  group_by(CONTROL) %>%
+  select(CONTROL, INSTNM, ADM_RATE, NPT41_PUB, NPT43_PUB, NPT45_PUB, NPT41_PRIV, NPT43_PRIV, NPT45_PRIV) %>%
+  filter(ADM_RATE != "NA") %>%
+  tidyr::gather(key = QUINTILE, value = COST, NPT41_PUB, NPT43_PUB, NPT45_PUB, NPT41_PRIV, NPT43_PRIV, NPT45_PRIV) %>%
+  filter(COST != "NA")
+```
+
+Translate 6 names to Q1, Q3, Q5
+
+```{r}
+Public_Private
+```
+
+
+
+
+```{r}
+#Right_Table <- Public_Private %>%
+#  select(QUINTILE) %>%
+```
+
+
+```{r}
+ggplot(Public_Private, aes(ADM_RATE, COST)) + geom_point(color = "blue", alpha = 0.1) + facet_grid(CONTROL~QUINTILE)
+```
+
