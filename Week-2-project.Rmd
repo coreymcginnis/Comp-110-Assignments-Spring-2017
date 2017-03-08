@@ -15,7 +15,7 @@ I downloaded these data from the following site: "http://tiny.cc/dcf/Library-sma
 #Basics
 
 ```{r}
-load("~/Comp-110-Assignments-Spring-2017/Library-small.rda")
+load("/Users/coreymcginnis/Downloads/Library-small.rda")
 ```
 
 
