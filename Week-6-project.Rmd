@@ -35,3 +35,45 @@ Trips %>%
   
 ```
 
+3.
+```{r}
+Trips %>% 
+  mutate(time_of_day = lubridate::hour(sdate) + lubridate::minute(sdate) / 60) %>%
+  mutate(day_of_week = lubridate::wday(sdate)) %>%
+  ggplot(aes(x = time_of_day)) + geom_density() + facet_wrap(~day_of_week)
+```
+
+4.
+```{r}
+Trips %>% 
+  mutate(time_of_day = lubridate::hour(sdate) + lubridate::minute(sdate) / 60) %>%
+  mutate(day_of_week = lubridate::wday(sdate)) %>%
+  ggplot(aes(x = time_of_day)) + geom_density(aes(fill=client), alpha = 0.5) + facet_wrap(~day_of_week)
+```
+
+5.
+```{r}
+Trips %>% 
+  mutate(time_of_day = lubridate::hour(sdate) + lubridate::minute(sdate) / 60) %>%
+  mutate(day_of_week = lubridate::wday(sdate)) %>%
+  ggplot(aes(x = time_of_day)) + geom_density(aes(fill=client), alpha = 0.5, position = position_stack()) + facet_wrap(~day_of_week)
+```
+This first choice tells you a more interesting story because it is clearer when casual are riding, and when casual are riding. You see each peak individually
+
+6.
+facet on wday, fill with client
+```{r}
+Trips %>% 
+  mutate(time_of_day = lubridate::hour(sdate) + lubridate::minute(sdate) / 60) %>%
+  mutate(wday = ifelse(lubridate::wday(sdate) %in% c(1,7), "weekend", "weekday")) %>%
+  ggplot(aes(x = time_of_day)) + geom_density(aes(fill=client), alpha = 0.5) + facet_wrap(~wday)
+```
+
+facet on client, fill with wday
+```{r}
+Trips %>% 
+  mutate(time_of_day = lubridate::hour(sdate) + lubridate::minute(sdate) / 60) %>%
+  mutate(wday = ifelse(lubridate::wday(sdate) %in% c(1,7), "weekend", "weekday")) %>%
+  ggplot(aes(x = time_of_day)) + geom_density(aes(fill=wday), alpha = 0.5) + facet_wrap(~client)
+```
+Both are useful because we can see that registered users have a very similar pattern to weekday users, and casual to weekend users. Both however, tell nearly the same story.
