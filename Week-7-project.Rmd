@@ -1,13 +1,76 @@
 # Week 7 Project
 
-## Your name should appear here!
+## Corey McGinnis
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
 
 ```{r include = FALSE}
 library(DataComputing)
+library(lubridate)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+```{r}
+library(rvest)
+library(lubridate)
+page <- "http://en.wikipedia.org/wiki/List_of_nuclear_reactors"
+table_nodes <- page %>%
+  read_html() %>%
+  html_nodes("table")
+table_list <-
+  html_table(table_nodes[1:30], fill = TRUE)
+```
+```{r}
+table = table_list[[24]]
+names(table)
+
+```
+
+```{r}
+new_names <- c("Name","Reactor Number", "Type", "Model", "Status", "Net Capacity (MW)", "Gross Capacity (MW)", "Construction Start Date", "Commercial Operation Date", "Closure Date")
+names(table) <- new_names
+table <- table[-1,]
+
+# table$`Closure Date` <- ifelse(table$`Closure Date`=='',NA,table$`Closure Date`)
+# 
+# table$`Construction Start Date` <- ifelse(table$`Construction Start Date`=='',NA,table$`Construction Start Date`)
+# 
+# table$`Commercial Operation Date` <- ifelse(table$`Commercial Operation Date`=='',NA,table$`Commercial Operation Date`)
+
+
+
+```
+
+```{r}
+constr_date <- lubridate::dmy(table$`Construction Start Date`)
+
+table$`Construction Start Date` <- constr_date
+```
+
+```{r}
+formatted_operation_date <- lubridate::dmy(table$`Commercial Operation Date`)
+
+table$`Commercial Operation Date` <- formatted_operation_date
+```
+
+```{r}
+close_date <- lubridate::dmy(table$`Closure Date`)
+table$`Closure Date` <-
+  close_date
+```
+
+```{r}
+table %>% ggplot(aes(constr_date,`Net Capacity (MW)`)) + geom_point(aes(col = `Type`))
+```
+
+```{r}
+table <- table %>%
+  mutate(id = paste(`Name`,`Reactor Number`))
+```
+
+```{r}
+table%>%ggplot(aes(constr_date,`id`)) + geom_segment(aes(xend= formatted_operation_date, yend = `id` ))
+```
+
+
