@@ -8,6 +8,8 @@ Compiled on `r date()`.
 ```{r include = FALSE}
 library(DataComputing)
 library(ggdendro)
+library(tidyr)
+library(mosaic)
 ```
 <!-- put your content after this line -->
 
