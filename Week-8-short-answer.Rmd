@@ -11,3 +11,13 @@ library(DataComputing)
 <!-- put your content after this line -->
 
 Here is my content!
+17.2
+
+1. Variables: living_area, bathrooms, bedrooms, fireplaces
+2. No
+3. 
+```{r}
+179796.647-151424.497
+```
+$28372.15
+4. yes, this depends on living_area

@@ -7,7 +7,122 @@ Compiled on `r date()`.
 
 ```{r include = FALSE}
 library(DataComputing)
+library(lubridate)
+library(tidyr)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+15.1
+```{r}
+Me = dmy("8 April 1996")
+Metime = mdy_hm("Apr. 8, 1996 at 2:25pm")
+
+Gauss=mdy("April 30, 1777")
+Me-Gauss
+
+Turing=mdy("06-23-1912")
+Me-Turing
+
+Bell=dmy("3 March 1847")
+Me-Bell
+
+Armistice=mdy_hm("Nov. 11th, 1918 at 11:00am")
+Metime-Armistice
+
+Moon = mdy("July 20, 1969")
+Me-Moon
+```
+
+
+15.2
+```{r}
+#a
+as.numeric("42,659.30")
+#N
+extract_numeric("42,659.30")
+#Y
+
+#b
+as.numeric("17%")
+#N
+extract_numeric("17%")
+#Y
+
+#c
+as.numeric("Nineteen")
+#N
+extract_numeric("Nineteen")
+#N
+
+#d
+as.numeric("£100")
+#N
+extract_numeric("£100")
+#Y
+
+#e
+as.numeric("9.8 m/seconds-square")
+#N
+extract_numeric("9.8 m/seconds-square")
+#N
+
+#f
+as.numeric("9.8 m/s^2")
+#N
+extract_numeric("9.8 m/s^2")
+#Y
+
+#g
+as.numeric("6.62606957 × 10^-34 m2 kg / s")
+#N
+extract_numeric("6.62606957 × 10^-34 m2 kg / s")
+#N
+
+#h
+as.numeric("6.62606957e-34")
+#Y
+extract_numeric("6.62606957e-34")
+#N
+
+#i
+as.numeric("42.659,30")
+#N
+extract_numeric("42.659,30")
+#N
+```
+
+
+16.1
+```{r}
+Boys<- BabyNames %>%
+  group_by(name,sex) %>%
+  filter(grepl(".[aeiou]$",name)) %>%
+  filter(sex=="M") %>%
+  summarise(total=sum(count)) %>%
+  arrange(desc(total))
+
+Boys
+print(Boys$name[1:10])
+```
+
+```{r}
+Jo <- BabyNames %>%
+  group_by(name) %>%
+  filter(grepl("joe$|jo$",name,ignore.case=TRUE)) %>%
+  summarise(total=sum(count)) %>%
+  arrange(desc(total))
+
+Jo
+print(Jo$name[1:10])
+```
+
+
+16.2
+A telephone number
+
+16.3
+1. 2
+2. 50
+3. State codes
+
+

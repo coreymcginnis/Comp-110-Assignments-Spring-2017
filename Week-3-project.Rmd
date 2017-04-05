@@ -1,13 +1,99 @@
 # Week 3 Project
 
-## Your name should appear here! 
+## Corey McGinnis
 
 <!-- leave this material as is -->
 Compiled on `r date()`.
 
 ```{r include = FALSE}
 library(DataComputing)
+library(mosaicData)
 ```
 <!-- put your content after this line -->
 
-Here is my content!
+###Deconstructing graphics
+
+1) Scatter plot 
+variables: exper, wage, sector, married
+role: exper on x-axis, wage on y-axis, color by married, faceted by sector
+
+2) Density plot
+variables: bmi, sex, pregnant
+role: bmi on x axis, color by sex, faceted by pregnant
+No data variable for y-axis because it is a density plot: measures number of cases on x-axis
+
+```{r}
+ggplot(data = CPS85, aes(x =  exper, y = wage, color = married)) + geom_point() + facet_wrap( ~ sector)
+ggplot(data = NCHS, aes(x = bmi, fill = TRUE, alpha = .01)) + geom_density(aes(color = sex)) + facet_wrap(~ pregnant)
+```
+
+###Wrangling
+
+1.
+```{r}
+diamonds %>% 
+  group_by( color ) %>% 
+  summarise( size = mean(carat) ) %>% 
+  arrange(desc( size )) %>% 
+  head( 1 )
+```
+
+2.
+```{r}
+diamonds %>% 
+  group_by( clarity ) %>% 
+  summarise( size = mean(table) ) %>%
+  arrange(desc( size )) %>% 
+  head( 1 )
+```
+
+####Voting
+
+1. cases
+```{r}
+tally(Minneapolis2013)
+```
+
+2. top 5 candidates
+```{r}
+Minneapolis2013 %>%
+  group_by(Second) %>%
+  summarise(votes = n()) %>%
+  arrange(desc(votes)) %>%
+  head(5)
+```
+
+3.
+```{r}
+Minneapolis2013 %>%
+  filter(First == "undervote") %>%
+  summarise(total1st = n())
+
+Minneapolis2013 %>%
+  filter(Second == "undervote") %>%
+  summarise(total2nd = n())
+
+Minneapolis2013 %>%
+  filter(Third == "undervote") %>%
+  summarise(total3rd = n())
+```
+
+4.
+```{r}
+Minneapolis2013 %>%
+  filter(First == "BETSY HODGES") %>%
+  group_by(Second) %>%
+  summarise(votes = n()) %>%
+  arrange(desc(votes)) %>%
+  head(3)
+```
+
+5.
+```{r}
+Minneapolis2013 %>%
+  group_by(Precinct) %>%
+  summarise(fraction = mean(First == "undervote")) %>%
+  arrange(desc(fraction)) %>%
+  head(1)
+```
+
